@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#header{
+  background-color: #483c3c;
+}
+#top {
+  position: relative;
+  color: white;
+  top: 0;
+  height: 70px;
+  width:1030px;
+  margin:0 auto;
+  overflow: hidden;
+}
+#logo {
+  float: left;
+  /* margin-left: 150px; */
+  margin-right: 80px;
+  position: relative;
+  top: 10px;
+}
+#logo h3 {
+  font-size: 21px;
+  font-weight: normal;
+  margin-bottom: 3px;
+  margin-top: 0;
+}
+#logo h3 span {
+  margin-right: 10px;
+}
+#logo hr {
+  margin: 0;
+}
+#logo p {
+  font-size: 12px;
+  margin-top: 3px;
+}
+#columns {
+  float: left;
+  position: relative;
+  top: 24px;
+}
+ul#columns li {
+  float: left;
+  list-style-type: none;
+  margin-right: 30px;
+}
+ul#columns li a {
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+}
+#right {
+  float: right;
+  position: relative;
+  top: 24px;
+}
+
+#right #search-text {
+  width:100px;
+  border: 0;
+  background-color: black;
+  height: 26px;
+  border-radius: 16px;
+}
+#right a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: white;
+}
+#right #btnSearch {
+  vertical-align: middle;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  position: absolute;
+  left: 70px;
+  background: url(../../imgs/search.png) #348434 no-repeat 5px;
+}
+
+#selectedTab {
+  border: 10px solid;
+  border-color: transparent transparent white transparent;
+  width: 0;
+  position: absolute;
+  bottom: 0;
+}

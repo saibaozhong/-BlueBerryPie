@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
 }
-#header{
+#header {
   background-color: #483c3c;
 }
 #top {
@@ -10,16 +10,23 @@
   color: white;
   top: 0;
   height: 70px;
-  width:1030px;
-  margin:0 auto;
+  width: 1055px;
+  margin: 0 auto;
   overflow: hidden;
 }
 #logo {
   float: left;
   /* margin-left: 150px; */
-  margin-right: 80px;
+  margin-right: 40px;
   position: relative;
   top: 10px;
+  overflow: hidden;
+}
+#logo div {
+  display: inline-block;
+}
+#logo img{
+  width: 60px;
 }
 #logo h3 {
   font-size: 21px;
@@ -59,11 +66,11 @@ ul#columns li a {
 }
 
 #right #search-text {
-  width:100px;
+  width: 100px;
   border: 0;
   background-color: black;
   height: 26px;
-  border-radius: 16px;
+  border-radius: 12px;
 }
 #right a {
   margin-left: 15px;
@@ -78,6 +85,7 @@ ul#columns li a {
   position: absolute;
   left: 70px;
   background: url(../../imgs/search.png) #348434 no-repeat 5px;
+  border-radius: 0 12px 12px 0;
 }
 
 #selectedTab {

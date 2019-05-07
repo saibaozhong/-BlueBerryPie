@@ -7,3 +7,29 @@ function setSelectedTab(index){
         selectedTab.style.left = left + currentLi + 5 + 'px';
     }    
   }
+
+  var dlgLogin;
+
+  $(window).load(function(){
+    
+    //弹出登录对话框
+    $('#ahrefLogin').click(function(){
+        dlgLogin = $( "#login-dlg").dialog({      
+          resizable: false,
+          closeText: "hide",
+          title: "",
+          height: "auto",
+          width: 285,
+          modal: true
+        });
+       
+        dlgLogin.siblings('.ui-widget-header').css({
+          "background-color": "#fff",
+           "border": "none"
+        }).find('button').hide();
+
+        dlgLogin.find('#close-icon').click(function(){
+          $( dlgLogin ).dialog( "close" );
+        });
+    });
+  });

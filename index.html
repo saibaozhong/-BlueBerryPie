@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="common/css/footer.css">
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
 
     <script src='js/jquery-1.12.3.min.js'></script>
+    <script src='js/jquery-ui.min.js'></script>
     <script src='js/swiper.min.js'></script>
     <script src='js/utils.js'></script>
 
@@ -21,9 +23,6 @@
     <div id='header'>
         <div id="top">
             <div id="logo">
-                <div>
-                    <img src="imgs/mlogo_03.png" alt="logo">
-                </div>
                 <div>
                     <h3>
                         <span>蓝</span>
@@ -52,10 +51,47 @@
             <div id='right'>
                 <input type='text' id='search-text'>
                 <a href="javascript:;" id='btnSearch'></a>
-                <a href="javascript:;" id='btnLogin'>登录</a>
-                <a href="javascript:;" id='btnRegister'>注册</a>
+                <a href="javascript:;" id='ahrefLogin'>登录</a>
+                <a href="javascript:;" id='ahrefRegister'>注册</a>
             </div>
         </div>
+    </div>
+    <!-- 登录注册的对话框 -->
+    <div id="login-dlg">
+        <p style='position:relative'>
+            <a href="javascript:;" class='select'>登&nbsp;&nbsp;录</a>
+            <a href="javascript:;" class='unselect'>注&nbsp;&nbsp;册</a>
+            <span class="border-down">
+                <span></span>
+            </span>
+            <span id='close-icon' >
+                <img src="imgs/close.png">
+            </span>
+        </p>
+        <p>
+            <input type='text' id='txtName' placeholder='用户账号'>
+        </p>
+        <p>
+            <input type='password' id='txtPsd' placeholder='账号密码'>
+        </p>
+        <p>
+            <input type='text' id='txtCode' placeholder='验证码' style='position:relative;bottom: 18px; width:80px;'>
+            <a href="javascript:;"></a>
+        </p>
+        <p>
+            <input type='button' id='btnLogin' value='登&nbsp;&nbsp;录'>
+        </p>
+        <div>
+            <h5 style='margin-bottom: 10px;'>您还可以用第三方账号登录</h5>
+            <ul style='overflow: hidden'>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+            </ul>
+        </div>
+        <p style=' text-align: right;'>
+            <a href='javascript:;' style=' text-decoration: none;'>忘记密码？</a>
+        </p>
     </div>
     <div id='content'>
         <!-- <h3 style='text-align: center'> ddddd首页。。。</h3> -->
@@ -63,9 +99,9 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <img src='imgs/lunbo.png'>
-                </div>               
+                </div>
                 <div class="swiper-slide"><img src='imgs/building1.jpg'></div>
-                <div class="swiper-slide"><img src='imgs/building2.jpg'></div>               
+                <div class="swiper-slide"><img src='imgs/building2.jpg'></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>

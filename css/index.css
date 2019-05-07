@@ -2,7 +2,9 @@
   width:1920px;
   height: 400px;
 }
-
+#login-dlg{
+  display: none;
+}
 .content-title,
 .content-title2,
 .content-title3 {

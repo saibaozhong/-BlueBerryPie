@@ -25,7 +25,7 @@
 #logo div {
   display: inline-block;
 }
-#logo img{
+#logo img {
   width: 60px;
 }
 #logo h3 {
@@ -94,4 +94,112 @@ ul#columns li a {
   width: 0;
   position: absolute;
   bottom: 0;
+}
+
+.border-down {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid silver;
+  position: relative;
+  margin-left: 50px;
+}
+.border-down span {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 10px solid white;
+  position: absolute;
+  left: -9px;
+  top: -11px;
+}
+
+#login-dlg {
+  font-size: 13px;
+  bottom: 25px;
+}
+
+#login-dlg p {
+  margin-bottom: 8px;
+}
+
+#close-icon{
+  position: absolute;
+  width:18px;
+  height:18px;
+  left:248px;
+  top:-10px;
+  cursor: pointer;
+}
+#login-dlg #btnLogin {
+  padding: 5px;
+  height: 37px;
+  border: 1px solid #394817;
+  background-color: #394817;
+  width: 239px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+#login-dlg input[type="text"],
+#login-dlg input[type="password"] {
+  border: 1px solid silver;
+  padding: 5px;
+  height: 25px;
+  width: 227px;
+}
+#login-dlg .select {
+  font-weight: bold;
+}
+#login-dlg .unselect {
+  font-weight: bold;
+  color: white;
+  background-color: #e25c5c;
+}
+#login-dlg p:nth-child(1) a {
+  display: inline-block;
+  width: 115px;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid silver;
+}
+
+#login-dlg p:nth-child(4) a {
+  display: inline-block;
+  width: 142px;
+  height: 42px;
+  background: url("../../imgs/yanzhengma.jpg") no-repeat;
+  position: relative;
+}
+
+#login-dlg ul li {
+  list-style-type: none;
+  float: left;
+}
+
+#login-dlg ul li:nth-child(1) a {
+  background: url("../../imgs/login_icon.png") 0 0 no-repeat;
+  background-color: lightgray;
+}
+
+#login-dlg ul li:nth-child(2) a {
+  background: url("../../imgs/login_icon.png") -59px 0 no-repeat;
+  background-color: lightgray;
+}
+
+#login-dlg ul li:nth-child(3) a {
+  background: url("../../imgs/login_icon.png") -118px 0 no-repeat;
+  background-color: lightgray;
+}
+
+#login-dlg ul li a {
+  display: block;
+  width: 55px;
+  height: 44px;
 }

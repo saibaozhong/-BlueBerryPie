@@ -47,6 +47,7 @@
   font-size: 12px;
 }
 
+/* ------------- */
 #yuezhang {
   width: 1030px;
   margin: 10px auto;
@@ -60,13 +61,10 @@
   width: 16px;
   margin: 0 auto;
   display: inline-block;
-  top: 10px;
+  top: 5px;
   position: relative;
 }
 
-#yuezhang .icon {
-  background: url(../imgs/imgs/sysp.png) no-repeat -25px 0;
-}
 
 .yuezhang-item {
   display: inline-block;

@@ -16,21 +16,24 @@
     <script src='js/jquery-ui.min.js'></script>
     <script src='js/swiper.min.js'></script>
     <script src='js/utils.js'></script>
-   
-   <script>
-        function bannerLunbo() {
-            //1.轮播图---
-            var mySwiper1 = new Swiper('#swiper-building', {
-                            loop: true, // 循环模式选项        
-                            // 如果需要分页器
-                            pagination: {
-                                el: '.swiper-pagination',
-                                clickable: true,
-                            },
-                            autoplay: true,
-                            //视差效果
-                            parallax: true,
-                        });
+
+    <script>
+        function add0(m) {
+            return m < 10 ? '0' + m : m
+        }
+
+        function getFormatTime(str) {
+            //shijianchuo是整数，否则要parseInt转换
+            var time = new Date(str);
+            var y = time.getFullYear();
+            var m = time.getMonth() + 1;
+            var d = time.getDate();
+            var h = time.getHours();
+            var mm = time.getMinutes();
+            var s = time.getSeconds();
+            var result = m + '/' + d + ' ' + add0(h) + ':' + add0(mm);
+          //  return y + '年' + m + '月' + d + '日 ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+           return result;
         }
 
         $(function () {
@@ -54,10 +57,71 @@
                         }
                         //str里面 包含了  4个 div swiper 
                         $(".bannerImg").html(str);
-                        bannerLunbo();                        
+
+                        var mySwiper1 = new Swiper('#swiper-building', {
+                            loop: true, // 循环模式选项        
+                            // 如果需要分页器
+                            pagination: {
+                                el: '.swiper-pagination',
+                                clickable: true,
+                            },
+                            autoplay: true,
+                            //视差效果
+                            parallax: true,
+                        });
                     }
                     else {
                         console.log('获取首页第一个轮播图失败！');
+                    }
+                }
+            });
+
+            //2.乐章部分
+            $.ajax({
+                type: 'get',
+                url: 'http://wwtliu.com/sxtstu/blueberrypai/getIndexMovement.php',
+                success: function (data) {
+                    if (data.success) {
+                        var str = JSON.stringify(data);
+                        // replace()替换 地址
+                        var newUrl = str.replace(/iwen.wiki/ig, 'www.wwtliu.com');
+                        //字符串--》对象
+                        var data2 = JSON.parse(newUrl);
+                        var iconEle = $('#yuezhang .content-title2 .icon img');
+                        iconEle.attr('src', data2.titleImg);
+
+                        //通过总个数确定slide的页数，并根据第一个slide复制出其他的
+                        var index = 0;
+                        var len = data2.movement.length;
+                        var slideCount = len / 4;
+                        for (var i = 1; i < slideCount; i++) {
+                            var slide = $('#swiper-yuezhang .swiper-slide:eq(0)');
+                            slide.clone().appendTo($('#swiper-yuezhang .swiper-wrapper'));
+                        }
+
+                        //依次为每一个slide里的DOM元素赋值
+                        for (var j = 0; j < len; j++) {
+                            var item = data2.movement[j];
+                            var slideItem = $('#swiper-yuezhang .yuezhang-item').eq(j);
+                            slideItem.find('.yuezhang-icon img').attr('src', item.img);
+                            slideItem.find('.yuezhang-content h4').html(item.title);
+                            slideItem.find('.yuezhang-content p span:eq(0)').html(item.writer);
+                            slideItem.find('.yuezhang-content p span:eq(1) span').html(getFormatTime(item.time*1000));
+                            slideItem.find('.yuezhang-content .title').html(item.content);
+                            slideItem.find('.yuezhang-content .operation a:eq(0)').next().html(item.like);
+                            slideItem.find('.yuezhang-content .operation a:eq(1)').next().html(item.message);
+                        }
+
+                        var mySwiper2 = new Swiper('#swiper-yuezhang', {
+                            loop: true, // 循环模式选项   
+                            pagination: {
+                                el: '.swiper-pagination',
+                            },
+                        });
+                    }
+                    else {
+
+                        console.log('获取首页乐章部分失败！');
                     }
                 }
             });
@@ -154,7 +218,9 @@
             <h3 class='content-title'>乐&nbsp;&nbsp;&nbsp;章</h3>
             <div class='content-title2'>
                 <span> ——— </span>
-                <span class='icon'></span>
+                <span class='icon'>
+                    <img al=''>
+                </span>
                 <span> ——— </span>
             </div>
             <h3 class='content-title3'>MOVEMENT</h3>
@@ -175,7 +241,7 @@
                                             <span style='color:gray;'>5/23 16:15</span>
                                         </span>
                                     </p>
-                                    <div>
+                                    <div class='title'>
                                         好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
                                     </div>
                                     <div class='operation'>
@@ -233,288 +299,6 @@
                             <div class='yuezhang-item'>
                                 <div class='yuezhang-icon'>
                                     <img src="imgs/sy2.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_03.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_03.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_03.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_03.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_06.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_06.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_06.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_06.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_09.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_09.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_09.png">
-                                </div>
-                                <div class='yuezhang-content'>
-                                    <h4>岁月不老，一世倾城</h4>
-                                    <p>
-                                        <span>小夏同学</span>
-                                        <span>
-                                            <a href="javascript:;"></a>
-                                            <span style='color:gray;'>5/23 16:15</span>
-                                        </span>
-                                    </p>
-                                    <div>
-                                        好的心情总是在黎明醒来的时候，平淡的生活就因有了自己喜爱的一份报纸而变得生动鲜活，就像最为知心的朋友，每天都要见上一面，互相认真的读一读，听一听彼此的心事，这份晨光里的心灵之约，美丽着身心，净化着时间。多年来的厮守啊，实在是不能割舍。
-                                    </div>
-                                    <div class='operation'>
-                                        <a href="javascript:;" class='good'></a><span>22</span>
-                                        <a href="javascript:;" class='share'></a><span>22</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='yuezhang-item'>
-                                <div class='yuezhang-icon'>
-                                    <img src="imgs/yuezhang_09.png">
                                 </div>
                                 <div class='yuezhang-content'>
                                     <h4>岁月不老，一世倾城</h4>
@@ -1348,13 +1132,6 @@
     </div>
     <script>
         setSelectedTab(0);
-
-        var mySwiper2 = new Swiper('#swiper-yuezhang', {
-            loop: true, // 循环模式选项   
-            pagination: {
-                el: '.swiper-pagination',
-            },
-        });
 
         var mySwiper3 = new Swiper('#swiper-lequ', {
             loop: true, // 循环模式选项     

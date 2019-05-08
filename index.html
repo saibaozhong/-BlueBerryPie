@@ -16,6 +16,53 @@
     <script src='js/jquery-ui.min.js'></script>
     <script src='js/swiper.min.js'></script>
     <script src='js/utils.js'></script>
+   
+   <script>
+        function bannerLunbo() {
+            //1.轮播图---
+            var mySwiper1 = new Swiper('#swiper-building', {
+                            loop: true, // 循环模式选项        
+                            // 如果需要分页器
+                            pagination: {
+                                el: '.swiper-pagination',
+                                clickable: true,
+                            },
+                            autoplay: true,
+                            //视差效果
+                            parallax: true,
+                        });
+        }
+
+        $(function () {
+            //首页第一个轮播图
+            $.ajax({
+                type: 'get',
+                url: 'http://wwtliu.com/sxtstu/blueberrypai/getIndexBanner.php',
+                success: function (data) {
+                    if (data.success) {
+                        var list = data.banner;
+
+                        var str = '';
+                        for (var i = 0; i < list.length; i++) {
+                            str += '<div class="swiper-slide">' +
+                                '<img src=' + list[i].img + ' alt="">' +
+                                '<div class="bannerInfo" data-swiper-parallax="-2000" data-swiper-parallax-duration="600">' +
+                                '<h2>' + list[i].title + '</h2>' +
+                                '<p>' + list[i].content + '</p>' +
+                                '</div>' +
+                                '</div>';
+                        }
+                        //str里面 包含了  4个 div swiper 
+                        $(".bannerImg").html(str);
+                        bannerLunbo();                        
+                    }
+                    else {
+                        console.log('获取首页第一个轮播图失败！');
+                    }
+                }
+            });
+        });
+    </script>
 
 </head>
 
@@ -67,7 +114,7 @@
             <span class="border-down">
                 <span></span>
             </span>
-            <span id='close-icon' >
+            <span id='close-icon'>
                 <img src="imgs/close.png">
             </span>
         </p>
@@ -99,12 +146,7 @@
     <div id='content'>
         <!-- <h3 style='text-align: center'> ddddd首页。。。</h3> -->
         <div class="swiper-container" id="swiper-building">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src='imgs/lunbo.png'>
-                </div>
-                <div class="swiper-slide"><img src='imgs/building1.jpg'></div>
-                <div class="swiper-slide"><img src='imgs/building2.jpg'></div>
+            <div class="swiper-wrapper bannerImg">
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -1306,13 +1348,6 @@
     </div>
     <script>
         setSelectedTab(0);
-
-        var mySwiper1 = new Swiper('#swiper-building', {
-            loop: true, // 循环模式选项 
-            pagination: {
-                el: '.swiper-pagination',
-            },
-        });
 
         var mySwiper2 = new Swiper('#swiper-yuezhang', {
             loop: true, // 循环模式选项   

@@ -11,6 +11,29 @@
   text-align: center;
 }
 
+.bannerImg img{
+  width: 100%;
+  height: 500px;
+}
+.bannerImg .swiper-slide{
+  position: relative;
+}
+.bannerInfo{
+  position: absolute;
+  width: 400px;
+  height: 260px;
+  background: rgba(0,0,0,0.5);
+  left:200px;
+  top:100px;
+  color:#fff;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+.bannerInfo p{
+  margin-top: 20px;
+  line-height: 26px;
+}
+
 .content-title {
   margin-top: 15px;
 }

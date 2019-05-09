@@ -9,7 +9,7 @@
   position: relative;
   color: white;
   top: 0;
-  height: 70px;
+  height: 80px;
   width: 1055px;
   margin: 0 auto;
   overflow: hidden;
@@ -64,7 +64,11 @@ ul#columns li a {
   position: relative;
   top: 24px;
 }
-
+#right p:nth-child(2){
+  text-align: right;
+  padding-top:3px;
+  font-size:14px;
+}
 #right #search-text {
   width: 100px;
   border: 0;
@@ -118,21 +122,40 @@ ul#columns li a {
   top: -11px;
 }
 
+.wrapper{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  padding-top: 140px;
+  /* 大盒子 */
+  display: none;
+  z-index: 1000;
+}
+
+
 #login-dlg {
   font-size: 13px;
   bottom: 25px;
+  width: 255px;
+  height: 360px;
+  padding:10px 20px;
+  background: #fff;
+  margin:0 auto;
 }
 
 #login-dlg p {
   margin-bottom: 8px;
 }
 
-#close-icon{
+#close-icon {
   position: absolute;
-  width:18px;
-  height:18px;
-  left:248px;
-  top:-10px;
+  width: 18px;
+  height: 18px;
+  left: 248px;
+  top: -10px;
   cursor: pointer;
 }
 #login-dlg #btnLogin {

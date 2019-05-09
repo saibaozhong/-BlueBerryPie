@@ -1,35 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 #swiper-building img {
-  width:1920px;
+  width: 1920px;
   height: 400px;
 }
-#login-dlg{
-  display: none;
-}
+
 .content-title,
 .content-title2,
 .content-title3 {
   text-align: center;
 }
 
-.bannerImg img{
+.bannerImg img {
   width: 100%;
   height: 500px;
 }
-.bannerImg .swiper-slide{
+.bannerImg .swiper-slide {
   position: relative;
 }
-.bannerInfo{
+.bannerInfo {
   position: absolute;
   width: 400px;
   height: 260px;
-  background: rgba(0,0,0,0.5);
-  left:200px;
-  top:100px;
-  color:#fff;
+  background: rgba(0, 0, 0, 0.5);
+  left: 200px;
+  top: 100px;
+  color: #fff;
   padding-left: 30px;
   padding-top: 30px;
 }
-.bannerInfo p{
+.bannerInfo p {
   margin-top: 20px;
   line-height: 26px;
 }
@@ -65,7 +67,6 @@
   position: relative;
 }
 
-
 .yuezhang-item {
   display: inline-block;
   width: 490px;
@@ -76,8 +77,8 @@
 }
 .yuezhang-icon {
   position: relative;
-  bottom: 32px;
 }
+
 .yuezhang-icon img {
   width: 210px;
   height: 210px;
@@ -89,7 +90,6 @@
 }
 .yuezhang-content {
   position: relative;
-  /* bottom: 106px; */
   width: 245px;
   margin-left: 12px;
 }
@@ -110,6 +110,9 @@
 .yuezhang-content div:nth-child(3) {
   font-size: 13px;
   line-height: 22px;
+  height: 160px;
+  overflow-y: auto;
+  /* border:1px solid black; */
 }
 /* shequBackgroundImg2.png */
 .yuezhang-content .operation {
@@ -147,7 +150,7 @@
   width: 200px;
   /* border:1px solid red; */
 }
- 
+
 #swiper-listening li img {
   width: 184px;
   height: 220px;
@@ -158,16 +161,15 @@
   color: #68bd82;
 }
 
- 
 #swiper-listening li div {
   line-height: 25px;
   font-size: 13px;
-  height:160px;
+  height: 160px;
   overflow-y: auto;
 }
-#swiper-listening .comment{
+#swiper-listening .comment {
   position: relative;
-  bottom:19px;
+  bottom: 19px;
 }
 
 /* ------------- */
@@ -230,7 +232,7 @@
 }
 #chating .icon {
   background: url(../imgs/imgs/sysp.png) no-repeat -12px 0;
-  width:14px;
+  width: 14px;
 }
 
 .chating-item {
@@ -246,20 +248,18 @@
   height: 40px;
   background-color: skyblue;
   border-radius: 30px;
- 
 }
-.chating-icon span{
+.chating-icon span {
   display: inline-block;
   position: relative;
-  left:7px;
-  top:7px;
-  font-size:12px;
+  left: 7px;
+  top: 7px;
+  font-size: 12px;
   color: white;
-  
 }
 .chating-icon,
 .chating-content {
-  float:left;
+  float: left;
   margin-right: 8px;
 }
 
@@ -267,11 +267,11 @@
   width: 275px;
 }
 
-.chating-content div{
- font-size:13px;
- line-height: 23px;
- overflow-y: auto;
- height:110px;
+.chating-content div {
+  font-size: 13px;
+  line-height: 23px;
+  overflow-y: auto;
+  height: 110px;
 }
 
 /* ------------ */
@@ -281,7 +281,7 @@
 }
 #travel .icon {
   background: url(../imgs/imgs/sysp.png) no-repeat -59px 0;
-  width:18px;
+  width: 18px;
 }
 
 .travel-item {
@@ -289,59 +289,59 @@
   width: 200px;
   position: relative;
   border: 1px solid silver;
-  margin-right:15px;
+  margin-right: 15px;
   /* height: 140px; */
 }
 
 .travel-icon {
-   position: relative; 
+  position: relative;
 }
 
-.travel-icon img{
-   width: 200px;
-   height:250px; 
+.travel-icon img {
+  width: 200px;
+  height: 250px;
 }
 
-.travel-icon span{
-   position: absolute;
-   top:100px;
-   font-size: 12px;
-   line-height: 25px;
-   color:white;
-   background-color: #424141;
-   opacity:0.7;
-   padding: 0 10px;
+.travel-icon span {
+  position: absolute;
+  top: 100px;
+  font-size: 12px;
+  line-height: 25px;
+  color: white;
+  background-color: #424141;
+  opacity: 0.7;
+  padding: 0 10px;
 }
 
-.travel-content{
-  padding:8px;
+.travel-content {
+  padding: 8px;
 }
 
-.travel-content h5{
-   font-size: 12px;
+.travel-content h5 {
+  font-size: 12px;
 }
 
-.travel-content a{
+.travel-content a {
   color: skyblue;
-  font-size:11px;
+  font-size: 11px;
   text-decoration: none;
 }
 
 /* ------------ */
-#photo{
+#photo {
   background-color: #f5f5f5;
   padding: 45px 0;
 }
 
 #photo ul {
-  overflow:hidden;
-  margin-bottom:-4px;
+  overflow: hidden;
+  margin-bottom: -4px;
 }
-#photo ul li{
+#photo ul li {
   list-style-type: none;
-  float:left;
+  float: left;
 }
-#photo ul li img{
-  width:220px;
-  height:130px;
+#photo ul li img {
+  width: 220px;
+  height: 130px;
 }

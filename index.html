@@ -32,11 +32,62 @@
             var mm = time.getMinutes();
             var s = time.getSeconds();
             var result = m + '/' + d + ' ' + add0(h) + ':' + add0(mm);
-          //  return y + '年' + m + '月' + d + '日 ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
-           return result;
+            //  return y + '年' + m + '月' + d + '日 ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+            return result;
         }
 
         $(function () {
+            $(".wrapper").click(function () {
+                $(".wrapper").hide();
+            });
+
+            //弹出登录对话框
+            $('#ahrefLogin').click(function () {
+                $(".wrapper").show();
+            });
+
+            $('#ahrefLogout').click(function () {
+                $('#ahrefLogin').show();
+                $('#ahrefRegister').show();
+                $(this).hide();
+                $('#ahrefUser').html('');
+            });
+
+            $('#login-dlg').click(function (e) {
+                e.stopPropagation();
+            });
+
+            $('#close-icon').click(function (e) {
+                $(".wrapper").hide();
+            });
+
+            $('#btnLogin').click(function () {
+                var name = $('#txtName').val().trim();
+                var psd = $('#txtPsd').val().trim();
+                var code = $('#txtCode').val().trim();
+                $.ajax({
+                    type: 'post',
+                    url: 'http://wwtliu.com/sxtstu/blueberrypai/login.php',
+                    data: {
+                        user_id: "iwen@qq.com",
+                        password: "iwen123",
+                        verification_code: "crfvw"
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            $('#ahrefUser').html('用户名：iwen@qq.com');
+                            $('#ahrefLogin').hide();
+                            $('#ahrefRegister').hide();
+                            $('#ahrefLogout').show();
+                            $(".wrapper").hide();
+                        }
+                        else {
+                            console.log(data.msg);
+                        }
+                    }
+                })
+            });
+
             //首页第一个轮播图
             $.ajax({
                 type: 'get',
@@ -106,10 +157,15 @@
                             slideItem.find('.yuezhang-icon img').attr('src', item.img);
                             slideItem.find('.yuezhang-content h4').html(item.title);
                             slideItem.find('.yuezhang-content p span:eq(0)').html(item.writer);
-                            slideItem.find('.yuezhang-content p span:eq(1) span').html(getFormatTime(item.time*1000));
+                            slideItem.find('.yuezhang-content p span:eq(1) span').html(getFormatTime(item.time * 1000));
                             slideItem.find('.yuezhang-content .title').html(item.content);
                             slideItem.find('.yuezhang-content .operation a:eq(0)').next().html(item.like);
                             slideItem.find('.yuezhang-content .operation a:eq(1)').next().html(item.message);
+                            
+                            //设置对齐
+                            var top = slideItem.find('.yuezhang-icon').position().top;
+                            var $content = slideItem.find('.yuezhang-content');
+                            $content.css('top', top+ 'px');
                         }
 
                         var mySwiper2 = new Swiper('#swiper-yuezhang', {
@@ -159,54 +215,64 @@
                 <li><a href="javascript:;">摄影</a></li>
                 <li><a href="javascript:;">诚品</a></li>
                 <li><a href="javascript:;">蓝莓酱</a></li>
-                <li><a href="javascript:;">社区</a></li>
+                <li style='margin-right:0;'><a href="javascript:;">社区</a></li>
             </ul>
             <div id='selectedTab'></div>
             <div id='right'>
-                <input type='text' id='search-text'>
-                <a href="javascript:;" id='btnSearch'></a>
-                <a href="javascript:;" id='ahrefLogin'>登录</a>
-                <a href="javascript:;" id='ahrefRegister'>注册</a>
+                <p>
+                    <input type='text' id='search-text'>
+                    <a href="javascript:;" id='btnSearch'></a>
+                    <a href="javascript:;" id='ahrefLogin'>登录</a>
+                    <a href="javascript:;" id='ahrefRegister'>注册</a>
+                    <a href="javascript:;" id='ahrefLogout' style='display:none;'>退出</a>
+                </p>
+                <p>
+                    <a href="javascript:;" id='ahrefUser'></a>
+                </p>
             </div>
         </div>
     </div>
     <!-- 登录注册的对话框 -->
-    <div id="login-dlg">
-        <p style='position:relative'>
-            <a href="javascript:;" class='select'>登&nbsp;&nbsp;录</a>
-            <a href="javascript:;" class='unselect'>注&nbsp;&nbsp;册</a>
-            <span class="border-down">
-                <span></span>
-            </span>
-            <span id='close-icon'>
-                <img src="imgs/close.png">
-            </span>
-        </p>
-        <p>
-            <input type='text' id='txtName' placeholder='用户账号'>
-        </p>
-        <p>
-            <input type='password' id='txtPsd' placeholder='账号密码'>
-        </p>
-        <p>
-            <input type='text' id='txtCode' placeholder='验证码' style='position:relative;bottom: 18px; width:80px;'>
-            <a href="javascript:;"></a>
-        </p>
-        <p>
-            <input type='button' id='btnLogin' value='登&nbsp;&nbsp;录'>
-        </p>
-        <div>
-            <h5 style='margin-bottom: 10px;'>您还可以用第三方账号登录</h5>
-            <ul style='overflow: hidden'>
-                <li><a href="javascript:;"></a></li>
-                <li><a href="javascript:;"></a></li>
-                <li><a href="javascript:;"></a></li>
-            </ul>
+    <div class="wrapper">
+        <div id="login-dlg">
+            <p style='position:relative;padding-top:22px;'>
+                <a href="javascript:;" class='select'>登&nbsp;&nbsp;录</a>
+                <a href="javascript:;" class='unselect'>注&nbsp;&nbsp;册</a>
+                <span class="border-down">
+                    <span></span>
+                </span>
+                <span id='close-icon'>
+                    <img src="imgs/close.png">
+                </span>
+            </p>
+            <p>
+                <input type='text' id='txtName' placeholder='用户账号'>
+            </p>
+            <p>
+                <input type='password' id='txtPsd' placeholder='账号密码'>
+            </p>
+            <p>
+                <input type='text' id='txtCode' placeholder='验证码' style='position:relative;bottom: 18px; width:80px;'>
+                <a href="javascript:;"></a>
+            </p>
+            <p>
+                <input type='button' id='btnLogin' value='登&nbsp;&nbsp;录'>
+            </p>
+            <div>
+                <h5 style='margin-bottom: 10px;'>您还可以用第三方账号登录</h5>
+                <ul style='overflow: hidden'>
+                    <li><a href="javascript:;"></a></li>
+                    <li><a href="javascript:;"></a></li>
+                    <li><a href="javascript:;"></a></li>
+                </ul>
+            </div>
+            <p style=' text-align: right;'>
+                <a href='javascript:;' style=' text-decoration: none;'>忘记密码？</a>
+            </p>
         </div>
-        <p style=' text-align: right;'>
-            <a href='javascript:;' style=' text-decoration: none;'>忘记密码？</a>
-        </p>
     </div>
+
+    <!-- 首页内容部分 -->
     <div id='content'>
         <!-- <h3 style='text-align: center'> ddddd首页。。。</h3> -->
         <div class="swiper-container" id="swiper-building">
